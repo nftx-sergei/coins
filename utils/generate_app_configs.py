@@ -18,6 +18,28 @@ electrum_coins = [f for f in os.listdir(f"{repo_path}/electrums") if os.path.isf
 ethereum_coins = [f for f in os.listdir(f"{repo_path}/ethereum") if os.path.isfile(f"{repo_path}/ethereum/{f}")]
 explorer_coins = [f for f in os.listdir(f"{repo_path}/explorers") if os.path.isfile(f"{repo_path}/explorers/{f}")]
 
+WALLET_ONLY_COINS = [
+    "ARRR-BEP20",
+    "RBTC",
+    "NVC",
+    "PAXG-ERC20",
+    "USDT-ERC20",
+    "BET",
+    "BOTS",
+    "CRYPTO",
+    "DEX",
+    "HODL",
+    "JUMBLR",
+    "MGW",
+    "MSHARK",
+    "PANGEA",
+    "REVS",
+    "SUPERNET",
+    "XPM",
+    "XVC",
+    "ATOM"
+]
+
 get_electrums_report()
 with open("electrum_scan_report.json", "r") as f:
     electrum_scan_report = json.load(f)
@@ -254,7 +276,11 @@ class CoinConfig:
                 self.data[self.ticker]["type"] = "Smart Chain"
 
     def is_wallet_only(self):
-        if "wallet_only" in self.coin_data:
+        if self.ticker in WALLET_ONLY_COINS:
+            self.data[self.ticker].update({
+                "wallet_only": True
+            })
+        elif "wallet_only" in self.coin_data:
             self.data[self.ticker].update({
                 "wallet_only": self.coin_data["wallet_only"]
             })
