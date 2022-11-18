@@ -11176,7 +11176,7 @@
     }
   },
   {
-    "coin": "USDF",
+    "coin": "USDF-SLP",
     "fname": "Fake USD",
     "is_testnet": true,
     "protocol": {
